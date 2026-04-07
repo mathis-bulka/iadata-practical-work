@@ -24,7 +24,7 @@ public class PracticalWorkBackendApplication {
     @Bean
     @Profile("!test")
     public ApplicationRunner run(RestClient.Builder builder) {
-        String clientId = "";     // I'd like to get the client Id through my .env file,
+        String clientId = "";     // I'd like to get the client's Id through my .env file,
         String clientSecret = ""; // but I'm currently struggling to do so
 
         RestClient restClient = builder.baseUrl("https://api.spotify.com").build();
