@@ -2,6 +2,7 @@ package fr.ToulouseMetropole.mathis.practical_work_backend;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,7 +17,11 @@ import fr.ToulouseMetropole.model.TokenResponse;
 public class PracticalWorkBackendApplication {
 
     private static final Logger log = LoggerFactory.getLogger(PracticalWorkBackendApplication.class);
-
+    @Value("${spotify.client-id}")
+    private String clientId;
+    @Value("${spotify.client-secret}")
+    private String clientSecret;
+    
     public static void main(String[] args) {
         SpringApplication.run(PracticalWorkBackendApplication.class, args);
     }
@@ -24,10 +29,10 @@ public class PracticalWorkBackendApplication {
     @Bean
     @Profile("!test")
     public ApplicationRunner run(RestClient.Builder builder) {
-        String clientId = "";     // I'd like to get the client's Id through my .env file,
-        String clientSecret = ""; // but I'm currently struggling to do so
-
         RestClient restClient = builder.baseUrl("https://api.spotify.com").build();
+        System.out.println(clientId);
+        System.out.println(clientSecret);
+
         return args -> {
             TokenResponse tokenResponse = restClient.post()
                     .uri("https://accounts.spotify.com/api/token")
