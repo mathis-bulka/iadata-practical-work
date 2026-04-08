@@ -1,16 +1,53 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import SearchBar from './components/SearchBar.vue'
+
+const artistId = ref("")
+const albums = ref<any[]>([])
+
+async function getArtistIdByName(name: string) {
+  const url = new URL("http://localhost:8080/artist")
+  url.searchParams.set("name", name)
+
+  try {
+    const response = await fetch(url)
+
+    const data = await response.json()
+    artistId.value = data.id
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+async function getArtistAlbumsById(id: string) {
+  const url = `http://localhost:8080/artists/${id}/albums`
+
+  try {
+    const response = await fetch(url)
+
+    const data = await response.json()
+    albums.value = data.items
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+async function search(name: string) {
+  await getArtistIdByName(name);
+  await getArtistAlbumsById(artistId.value);
+}
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-  </header>
+  <SearchBar @search="search" />
 
-  <main>
-    <h1>Practical Work on Spotify API using VueJS and Spring Boot</h1>
-    <SearchBar />
-  </main>
+  <br /><br />
+  <div v-if="albums.length > 0">
+    <div v-for="album in albums" :key="album.id">
+      <p>{{ album.name }}</p>
+      <img :src="album.images[0]?.url" width="150" />
+    </div>
+  </div>
 </template>
 
 <style scoped>
