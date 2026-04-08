@@ -1,8 +1,0 @@
-package fr.ToulouseMetropole.model;
-
-import java.util.List;
-
-public record ArtistAlbums(String href, int limit, String next, int offset, String previous, int total,
-        List<SimplifiedAlbumObject> items) {
-
-}
