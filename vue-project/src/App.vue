@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import SearchBar from './components/SearchBar.vue'
+import type { Artist } from './model/Artist'
+import type { Albums } from './model/Albums'
 
-const artistId = ref("")
-const albums = ref<any[]>([])
+const artist = ref<Artist | null>(null)
+const albums = ref<Albums>({ items : []})
 
 async function getArtistIdByName(name: string) {
   const url = new URL("http://localhost:8080/artist")
@@ -12,8 +14,8 @@ async function getArtistIdByName(name: string) {
   try {
     const response = await fetch(url)
 
-    const data = await response.json()
-    artistId.value = data.id
+    const data: Artist = await response.json()
+    artist.value = data
   } catch (error) {
     console.error(error)
   }
@@ -26,7 +28,7 @@ async function getArtistAlbumsById(id: string) {
     const response = await fetch(url)
 
     const data = await response.json()
-    albums.value = data.items
+    albums.value.items = data.items
   } catch (error) {
     console.error(error)
   }
@@ -34,7 +36,9 @@ async function getArtistAlbumsById(id: string) {
 
 async function search(name: string) {
   await getArtistIdByName(name);
-  await getArtistAlbumsById(artistId.value);
+  if (artist.value) {
+    await getArtistAlbumsById(artist.value.id);
+  }
 }
 </script>
 
@@ -42,8 +46,8 @@ async function search(name: string) {
   <SearchBar @search="search" />
 
   <br /><br />
-  <div v-if="albums.length > 0">
-    <div v-for="album in albums" :key="album.id">
+  <div v-if="albums.items.length > 0">
+    <div v-for="album in albums.items" :key="album.id">
       <p>{{ album.name }}</p>
       <img :src="album.images[0]?.url" width="150" />
     </div>
