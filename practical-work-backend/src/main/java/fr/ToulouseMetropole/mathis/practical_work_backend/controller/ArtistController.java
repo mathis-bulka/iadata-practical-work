@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestClient;
 
-import fr.ToulouseMetropole.mathis.practical_work_backend.model.ArtistObject;
-import fr.ToulouseMetropole.mathis.practical_work_backend.model.ArtistAlbums;
-import fr.ToulouseMetropole.mathis.practical_work_backend.model.SearchResponse;
-import fr.ToulouseMetropole.mathis.practical_work_backend.model.TokenResponse;
+import fr.ToulouseMetropole.mathis.practical_work_backend.model.album.ArtistAlbums;
+import fr.ToulouseMetropole.mathis.practical_work_backend.model.artist.ArtistObject;
+import fr.ToulouseMetropole.mathis.practical_work_backend.model.utils.SearchResponse;
+import fr.ToulouseMetropole.mathis.practical_work_backend.model.utils.TokenResponse;
 
 @RestController
 public class ArtistController {

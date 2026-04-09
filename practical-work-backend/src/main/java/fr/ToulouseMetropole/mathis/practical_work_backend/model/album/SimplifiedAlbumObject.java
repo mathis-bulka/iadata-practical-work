@@ -1,9 +1,14 @@
-package fr.ToulouseMetropole.mathis.practical_work_backend.model;
+package fr.ToulouseMetropole.mathis.practical_work_backend.model.album;
 
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import fr.ToulouseMetropole.mathis.practical_work_backend.model.artist.SimplifiedArtistsObject;
+import fr.ToulouseMetropole.mathis.practical_work_backend.model.utils.ExternalUrls;
+import fr.ToulouseMetropole.mathis.practical_work_backend.model.utils.Image;
+import fr.ToulouseMetropole.mathis.practical_work_backend.model.utils.Restrictions;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public record SimplifiedAlbumObject(@JsonProperty("album_type") String albumType,

@@ -1,4 +1,4 @@
-package fr.ToulouseMetropole.mathis.practical_work_backend.model;
+package fr.ToulouseMetropole.mathis.practical_work_backend.model.artist;
 
 import java.util.List;
 
