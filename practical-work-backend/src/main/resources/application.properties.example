@@ -1,3 +1,7 @@
 spring.application.name=practical-work-backend
 spotify.client-id=<your client id>
 spotify.client-secret=<your client secret>
+spring.datasource.url=<your database URL>
+spring.datasource.username=<your database username>
+spring.datasource.password=
+spring.datasource.driver-class-name=org.postgresql.Driver
