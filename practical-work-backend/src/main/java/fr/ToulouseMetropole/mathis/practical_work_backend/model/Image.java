@@ -1,5 +1,8 @@
 package fr.ToulouseMetropole.mathis.practical_work_backend.model;
 
-public record Image(String url, int height, int width) {
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+public record Image(String url) {
 
 }
